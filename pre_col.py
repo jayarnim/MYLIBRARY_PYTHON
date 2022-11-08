@@ -45,8 +45,6 @@ def pre_col(df, real_col = False, label_col = False, onehot_col = False) :
             label_dict[col] = list(encoder.classes_)
  
     if onehot_col != False :
-        for col in onehot_col
-        encoder = OneHotEncoder()
         df = pd.get_dummies(df, columns = onehot_col)
    
     return df

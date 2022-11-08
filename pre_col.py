@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 def pre_col(df, real_col = False, label_col = False, onehot_col = False) :
-    from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder, OneHotEncoder
+    from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
     
     if real_col != False :
         for col in real_col :
@@ -42,7 +42,6 @@ def pre_col(df, real_col = False, label_col = False, onehot_col = False) :
         for col in label_col :
             encoder = LabelEncoder()
             df[col] = encoder.fit_transform(df[[col]])
-            label_dict[col] = list(encoder.classes_)
  
     if onehot_col != False :
         df = pd.get_dummies(df, columns = onehot_col)

@@ -30,22 +30,14 @@ def season(x) :
     else : return '3_winter'
 
 def re_date(df, date_col, drop = True) :
-    from sklearn.preprocessing import LabelEncoder
-
     df[date_col] = df[date_col].apply(pd.to_datetime)
     df['YEAR'] = df[date_col].apply(lambda x : x.year)
     df['MONTH'] = df[date_col].apply(lambda x : x.month)
     df['DAY'] = df[date_col].apply(lambda x : x.day)
     df['HOUR'] = df[date_col].apply(lambda x : x.hour)
     df['WEEKDAY'] = df[date_col].apply(lambda x : x.day_name())
-
     df['WEEKDAY'] = df['WEEKDAY'].apply(weekday)
-    encoder = LabelEncoder()
-    df['WEEKDAY'] = encoder.fit_transform(df['WEEKDAY'])
-
     df['SEASON'] = df['MONTH'].apply(season)
-    encoder = LabelEncoder()
-    df['SEASON'] = encoder.fit_transform(df['SEASON'])
     
     if drop == True :
         df = df.drop([date_col], axis = 1)

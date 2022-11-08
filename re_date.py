@@ -1,10 +1,15 @@
 # date 칼럼 파싱하기
 # 비파괴적 함수
 # 기능 : date 칼럼을 년/월/일/시/요일/계절로 파싱함
+
 # 메인함수 : re_date(df, date_col, drop = True)
+# 반환값 : 년/월/일/시/요일/계절 컬럼이 추가된 df
+
 # df : 함수를 적용할 데이터프레임
 # date_col : 파싱할 칼럼명
 # drop : date_col 삭제 여부 (기본값은 삭제임)
+
+
 
 import numpy as np
 import pansdas as pd

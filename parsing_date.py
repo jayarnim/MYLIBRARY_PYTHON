@@ -1,16 +1,25 @@
-# date 칼럼 파싱하기
-# 비파괴적 함수
-# 기능 : date 칼럼을 년/월/일/시/요일/계절로 파싱함
-
 # 메인함수 : parsing_date(df, date_col, drop = True)
-# 반환값 : 년/월/일/시/요일/계절 컬럼이 추가된 df
+# 기능 : date 칼럼을 년/월/일/시/요일/계절/휴일여부로 파싱함
+# 반환값 :
+    # 년/월/일/시/요일/계절 컬럼이 추가된 df
+    # 연도 : YEAR
+    # 월 : MONTH
+    # 일 : DAY
+    # 시 : HOUR
+    # 요일 : WEEKDAY; 월(0_Monday), 화(1_Tuesday), 수(2_Wedensday), 목(3_Thursday), 금(4_Friday), 토(5_Saturday), 일(6_Sunday)
+    # 계절 : SEASON; 봄(0_Spring), 여름(1_Summer), 가을(2_Autumn), 겨울(3_Winter)
+    # 휴일 : HOLIDAY; 휴일(1), 휴일아님(0)
+# 매개변수 :
+    # df : 함수를 적용할 데이터프레임
+    # date_col : 파싱할 칼럼명
+    # drop : date_col 삭제 여부 (기본값은 삭제임)
+# 주의 :
+    # 라이브러리 holidays가 import된 것을 가정함
+    # 해당 라이브러리의 함수 인스턴스를 holidays라고 정의했음을 가정함
+    # 아래는 한국의 휴일을 계산하는 함수 holidays.KR()를 예시로 들었음
 
-# df : 함수를 적용할 데이터프레임
-# date_col : 파싱할 칼럼명
-# drop : date_col 삭제 여부 (기본값은 삭제임)
-
-
-
+    
+    
 import numpy as np
 import pansdas as pd
 import holidays
@@ -26,10 +35,10 @@ def weekday(x) :
     elif x == 'Sunday' : return '6_Sunday'
 
 def season(x) :
-    if x in range(3,6) : return '0_spring'
-    elif x in range(6,9) : return '1_summer'
-    elif x in range(9,12) : return '2_autumn'
-    else : return '3_winter'
+    if x in range(3,6) : return '0_Spring'
+    elif x in range(6,9) : return '1_Summer'
+    elif x in range(9,12) : return '2_Autumn'
+    else : return '3_Winter'
 
 def parsing_date(df, date_col, drop = True) :
     df[date_col] = df[date_col].apply(pd.to_datetime)

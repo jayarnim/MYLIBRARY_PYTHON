@@ -14,7 +14,7 @@
     # date_col : 파싱할 칼럼명
     # drop : date_col 삭제 여부 (기본값은 삭제임)
 # 주의 :
-    # 라이브러리 holidays가 import된 것을 가정함
+    # 라이브러리 holidays가 import되었음을 가정함
     # 해당 라이브러리의 함수 인스턴스를 holidays라고 정의했음을 가정함
     # 아래는 한국의 휴일을 계산하는 함수 holidays.KR()를 예시로 들었음
 

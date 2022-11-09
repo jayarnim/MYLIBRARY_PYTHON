@@ -13,7 +13,7 @@
 import numpy as np
 import pandas as pd
 
-def pre_col(df, label_col = False, onehot_col = False) :
+def pre_nom(df, label_col = False, onehot_col = False) :
     from sklearn.preprocessing import LabelEncoder
     
     if label_col != False :

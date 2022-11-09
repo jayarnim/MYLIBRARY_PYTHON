@@ -2,7 +2,7 @@
 # 비파괴적 함수
 # 기능 : date 칼럼을 년/월/일/시/요일/계절로 파싱함
 
-# 메인함수 : re_date(df, date_col, drop = True)
+# 메인함수 : parsing_date(df, date_col, drop = True)
 # 반환값 : 년/월/일/시/요일/계절 컬럼이 추가된 df
 
 # df : 함수를 적용할 데이터프레임
@@ -29,7 +29,7 @@ def season(x) :
     elif x in range(9,12) : return '2_autumn'
     else : return '3_winter'
 
-def re_date(df, date_col, drop = True) :
+def parsing_date(df, date_col, drop = True) :
     df[date_col] = df[date_col].apply(pd.to_datetime)
     df['YEAR'] = df[date_col].apply(lambda x : x.year)
     df['MONTH'] = df[date_col].apply(lambda x : x.month)

@@ -13,6 +13,8 @@
 
 import numpy as np
 import pansdas as pd
+import holidays
+holidays = holidays.KR()
 
 def weekday(x) :
     if x == 'Monday' : return '0_Monday'
@@ -38,6 +40,7 @@ def parsing_date(df, date_col, drop = True) :
     df['WEEKDAY'] = df[date_col].apply(lambda x : x.day_name())
     df['WEEKDAY'] = df['WEEKDAY'].apply(weekday)
     df['SEASON'] = df['MONTH'].apply(season)
+    df['HOLIDAY'] = df[date_col].apply(lambda x : 1 if x in holidays else 0)
     
     if drop == True :
         df = df.drop([date_col], axis = 1)

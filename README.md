@@ -3,13 +3,13 @@ private function and module
 
 ---
 
-## 데이터프레임
+## EDA
 
 - [**날짜 파싱하기**](https://github.com/jayarnim/MYLIBRARY/blob/main/parsing_date.py)
 
 ---
 
-## 전처리
+## ML & DL
 
 - [**다중공선성 높은 독립변수 제거하기**](https://github.com/jayarnim/MYLIBRARY/blob/main/drop_near.py)
 

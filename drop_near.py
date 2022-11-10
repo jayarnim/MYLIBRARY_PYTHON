@@ -1,9 +1,8 @@
 # 메인함수 :
-    # drop_near(df, target = False, i = 10, print = False)
+    # drop_near(df, target = False, i = 10)
     # df : 함수를 적용할 데이터프레임
     # target : 종속변수 칼럼명 (df에 종속변수가 존재하지 않을 경우 생략함)
     # i : 분산팽창계수가 얼마를 초과한 칼럼을 삭제할 것인가 (기본값은 10임)
-    # print : 잔존한 독립변수의 분산팽창계수에 관한 정보를 담은 데이터프레임을 출력할 것인가 (기본값은 출력하지 않음임)
 
 # 기능 :
     # 데이터프레임 df의 독립변수 중 다중공선성이 높은 변수를 삭제함
@@ -17,7 +16,7 @@
 import numpy as np
 import pandas as pd
 
-def drop_near(df, target = False, i = 10, print = False) :
+def drop_near(df, target = False, i = 10) :
     from statsmodels.stats.outliers_influence import variance_inflation_factor
 
     if target != False :
@@ -31,16 +30,9 @@ def drop_near(df, target = False, i = 10, print = False) :
         vif_max = vif['VIF'].max()
         vif_max_col = vif[vif['VIF'] == vif_max].loc[:, 'feature']
         
-        if vif_max > i :
-            df = df.drop(vif_max_col, axis = 1)        
-        else :
-            if print == True :
-                print(vif)
-                break
-            elif print == False :
-                break
+        if vif_max > i : df = df.drop(vif_max_col, axis = 1)        
+        else : break
 
-    if target != False :
-        df[target] = target_series
+    if target != False : df[target] = target_series
 
     return df

@@ -54,7 +54,7 @@ def season_label(x) :
     elif x in range(9,12) : return 2
     elif x in [1, 2, 12] : return 3
 
-def parsing_date(df, date_col, year = True, month = True, day = True, hour = True, weekday = True, season = True, holiday = True, drop = True) :
+def parsing_date(df, date_col, drop = True, year = True, month = True, day = True, hour = True, weekday = True, season = True, holiday = True) :
     df[date_col] = df[date_col].apply(pd.to_datetime)
     
     if year == True :

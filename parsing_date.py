@@ -57,28 +57,15 @@ def season_label(x) :
 def parsing_date(df, date_col, drop = True, year = True, month = True, day = True, hour = True, weekday = True, season = True, holiday = True) :
     df[date_col] = df[date_col].apply(pd.to_datetime)
     
-    if year == True :
-        df['YEAR'] = df[date_col].apply(lambda x : x.year)
-    
+    if year == True : df['YEAR'] = df[date_col].apply(lambda x : x.year)    
     if month == True :
         df['MONTH'] = df[date_col].apply(lambda x : x.month)
-        if season == True :
-                df['SEASON'] = df['MONTH'].apply(season_label)
+        if season == True : df['SEASON'] = df['MONTH'].apply(season_label)    
+    if day == True : df['DAY'] = df[date_col].apply(lambda x : x.day)    
+    if hour == True : df['HOUR'] = df[date_col].apply(lambda x : x.hour)    
+    if weekday == True : df['WEEKDAY'] = df[date_col].apply(lambda x : x.day_name()).apply(weekday_label)
+    if holiday == True : df['HOLIDAY'] = df[date_col].apply(lambda x : 1 if x in holidays else 0)
     
-    if day == True :
-        df['DAY'] = df[date_col].apply(lambda x : x.day)
-    
-    if hour == True :
-        df['HOUR'] = df[date_col].apply(lambda x : x.hour)
-    
-    if weekday == True :
-        df['WEEKDAY'] = df[date_col].apply(lambda x : x.day_name())
-        df['WEEKDAY'] = df['WEEKDAY'].apply(weekday_label)
-    
-    if holiday == True :
-        df['HOLIDAY'] = df[date_col].apply(lambda x : 1 if x in holidays else 0)
-    
-    if drop == True :
-        df = df.drop([date_col], axis = 1)
+    if drop == True : df = df.drop([date_col], axis = 1)
 
     return df

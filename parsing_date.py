@@ -1,5 +1,5 @@
 # 메인함수 :
-    # parsing_date(df, date_col, drop = True)
+    # parsing_date(df, date_col, drop = True, year = True, month = True, day = True, hour = True, weekday = True, season = True, holiday = True)
         # df : 함수를 적용할 데이터프레임
         # date_col : 파싱할 칼럼명
         # drop : date_col 삭제 여부 (기본값은 삭제임)

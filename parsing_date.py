@@ -25,8 +25,6 @@
         # 휴일 : HOLIDAY; 휴일(1), 휴일아님(0)
 
 # 주의 :
-    # 계절에 관한 정보를 담은 칼럼을 생성 시 다음을 가정함
-        # 본 함수를 통해 월에 관한 정보를 담은 칼럼이 생성될 것임
     # 휴일 여부에 관한 정보를 담은 칼럼을 생성 시 다음을 가정함
         # 라이브러리 holidays가 import되었음
         # 해당 라이브러리의 함수 인스턴스를 holidays라고 정의했음
@@ -49,18 +47,18 @@ def weekday_label(x) :
     elif x == 'Sunday' : return 6
 
 def season_label(x) :
-    if x in range(3,6) : return 0
-    elif x in range(6,9) : return 1
-    elif x in range(9,12) : return 2
-    elif x in [1, 2, 12] : return 3
+    if x in [3, 4, 5] : return 0
+    elif x in [6, 7, 8] : return 1
+    elif x in [9, 10, 11] : return 2
+    elif x in [12, 1, 2] : return 3
 
 def parsing_date(df, date_col, drop = True, year = True, month = True, day = True, hour = True, weekday = True, season = True, holiday = True) :
     df[date_col] = df[date_col].apply(pd.to_datetime)
     
-    if year == True : df['YEAR'] = df[date_col].apply(lambda x : x.year)    
-    if month == True :
-        df['MONTH'] = df[date_col].apply(lambda x : x.month)
-        if season == True : df['SEASON'] = df['MONTH'].apply(season_label)    
+    if year == True : df['YEAR'] = df[date_col].apply(lambda x : x.year)
+    df['MONTH'] = df[date_col].apply(lambda x : x.month)
+    if season == True : df['SEASON'] = df['MONTH'].apply(season_label)    
+    if month != True : df.drop(['MONTH'], axis = 1)
     if day == True : df['DAY'] = df[date_col].apply(lambda x : x.day)    
     if hour == True : df['HOUR'] = df[date_col].apply(lambda x : x.hour)    
     if weekday == True : df['WEEKDAY'] = df[date_col].apply(lambda x : x.day_name()).apply(weekday_label)

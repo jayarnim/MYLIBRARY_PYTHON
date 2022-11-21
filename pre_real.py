@@ -27,10 +27,10 @@ def pre_real(df, real_col) :
         upper_value = Q3 + IQR * 1.5
         df[col] = df[col].clip(lower = lower_value, upper = upper_value)
         
-    scaler = StandardScaler()
-    df[real_col] = scaler.fit_transform(df[real_col])
+        scaler = StandardScaler()
+        df[col] = scaler.fit_transform(df[[col]])
         
-    scaler = MinMaxScaler()
-    df[real_col] = scaler.fit_transform(df[real_col])
+        scaler = MinMaxScaler()
+        df[col] = scaler.fit_transform(df[[col]])
 
     return df

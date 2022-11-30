@@ -45,7 +45,7 @@ def season_label(x) :
     elif x in [12, 1, 2] : return 3
 
 def holiday(x) :
-    if (x in holidays) or (x.weekday >= 5) :  return 1
+    if (x in holidays) or (x.weekday() >= 5) :  return 1
     else : return 0
 
 def parsing_date(df, date_col, drop = True, year = True, month = True, day = True, weekday = True, hour = True, season = True, holiday = True) :
@@ -54,7 +54,7 @@ def parsing_date(df, date_col, drop = True, year = True, month = True, day = Tru
     if year == True : df['YEAR'] = df[date_col].apply(lambda x : x.year)
     df['MONTH'] = df[date_col].apply(lambda x : x.month)
     if day == True : df['DAY'] = df[date_col].apply(lambda x : x.day) 
-    if weekday == True : df['WEEKDAY'] = df[date_col].apply(lambda x : x.weekday)
+    if weekday == True : df['WEEKDAY'] = df[date_col].apply(lambda x : x.weekday())
     if hour == True : df['HOUR'] = df[date_col].apply(lambda x : x.hour)    
     if season == True : df['SEASON'] = df['MONTH'].apply(season_label)    
     if month != True : df.drop(['MONTH'], axis = 1)   

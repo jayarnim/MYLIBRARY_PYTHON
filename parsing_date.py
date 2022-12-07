@@ -27,8 +27,7 @@
 # 주의 :
     # 휴일 여부에 관한 정보를 담은 칼럼 생성 시 다음을 가정함
         # 휴일은 공휴일, 토요일, 일요일을 포괄함
-        # 라이브러리 holidays가 import되었음
-        # 해당 라이브러리의 함수 인스턴스를 holidays라고 정의했음
+        # 라이브러리 holidays가 변수명 holiday_list으로 import되었음
         # 아래는 한국의 휴일을 계산하는 함수 holidays.KR()를 예시로 들었음
 
     
@@ -36,7 +35,7 @@
 import numpy as np
 import pansdas as pd
 import holidays
-holidays = holidays.KR()
+holiday_list = holidays.KR()
 
 def season_label(x) :
     if x in [3, 4, 5] : return 0
@@ -44,8 +43,8 @@ def season_label(x) :
     elif x in [9, 10, 11] : return 2
     elif x in [12, 1, 2] : return 3
 
-def holiday(x) :
-    if (x in holidays) or (x.weekday() >= 5) :  return 1
+def holiday_label(x) :
+    if (x in holiday_list) or (x.weekday() >= 5) :  return 1
     else : return 0
 
 def parsing_date(df, date_col, drop = True, year = True, month = True, day = True, weekday = True, hour = True, season = True, holiday = True) :
@@ -58,7 +57,7 @@ def parsing_date(df, date_col, drop = True, year = True, month = True, day = Tru
     if hour == True : df['HOUR'] = df[date_col].apply(lambda x : x.hour)    
     if season == True : df['SEASON'] = df['MONTH'].apply(season_label)    
     if month != True : df.drop(['MONTH'], axis = 1)   
-    if holiday == True : df['HOLIDAY'] = df[date_col].apply(holiday)
+    if holiday == True : df['HOLIDAY'] = df[date_col].apply(holiday_label)
     
     if drop == True : df = df.drop([date_col], axis = 1)
 
